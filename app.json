@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "SERA",
+    "slug": "SERA",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "SERA"
+}
