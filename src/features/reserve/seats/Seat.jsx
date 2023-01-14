@@ -31,7 +31,11 @@ export default function Seat1() {
     const date = new Date(year, month, 0);
     const days = [];
     for (let i = 1; i <= date.getDate(); i++) {
-      days.push({ label: `${i}`, value: `${i}` });
+      if (i <= 9) {
+        days.push({ label: `0${i}`, value: `0${i}` });
+      } else {
+        days.push({ label: `${i}`, value: `${i}` });
+      }
     }
     return days;
   }
@@ -39,19 +43,21 @@ export default function Seat1() {
   const data = daysInMonth();
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
   return (
     <Container>
       <View className="items-center">
         <ImageLogo />
       </View>
 
-      <Text className="text-xl">Month</Text>
-      <Text className="text-xl">of</Text>
-      <View className="flex-row items-center">
+      <View className="flex-row">
         <View>
+          <Text className="text-xl">Month</Text>
+          <Text className="text-xl">of</Text>
           <Text className="text-2xl font-bold">{monthString[month]}</Text>
         </View>
-        <View className="grow items-end">
+
+        <View className="grow items-end justify-end">
           <View className="w-1/3">
             <Dropdown
               className="border border-gray-400 rounded-md border-1 h-10 px-2"
@@ -76,7 +82,7 @@ export default function Seat1() {
         </View>
       </View>
 
-      <Text className="text-center">
+      <Text className="text-center my-4">
         Click a seat to place your reservation request
       </Text>
 

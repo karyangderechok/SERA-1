@@ -1,11 +1,33 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Chair from "../../../assets/chair";
 import { FlatList } from "react-native-gesture-handler";
+import { Modal, Portal } from "react-native-paper";
 
 export const Page1 = ({ value }) => {
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
+
+  const checker = (id, day) => {
+    if (day === null) {
+      setVisible(true);
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+          contentContainerStyle={{ backgroundColor: "white", padding: 20 }}>
+          <Text className="text-red-500">Please select day</Text>
+        </Modal>
+      </Portal>;
+    } else {
+      navigation.navigate("Calendar", {
+        id: id,
+        day: day,
+      });
+    }
+  };
+
   return (
     <View className="items-center flex grow">
       <FlatList
@@ -22,10 +44,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -48,10 +67,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -74,10 +90,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -100,10 +113,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -126,10 +136,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -152,10 +159,7 @@ export const Page1 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -170,6 +174,26 @@ export const Page1 = ({ value }) => {
 
 export const Page2 = ({ value }) => {
   const navigation = useNavigation();
+
+  const checker = (id, day) => {
+    if (day === null) {
+      setVisible(true);
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+          contentContainerStyle={{ backgroundColor: "white", padding: 20 }}>
+          <Text className="text-red-500">Please select day</Text>
+        </Modal>
+      </Portal>;
+    } else {
+      navigation.navigate("Calendar", {
+        id: id,
+        day: day,
+      });
+    }
+  };
+
   return (
     <View className="items-center flex grow">
       <FlatList
@@ -186,10 +210,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -212,10 +233,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -238,10 +256,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -264,10 +279,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -290,10 +302,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
@@ -316,10 +325,7 @@ export const Page2 = ({ value }) => {
             <View className="px-1">
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Calendar", {
-                    id: item.id,
-                    day: item.day,
-                  });
+                  checker(item.id, item.day);
                 }}>
                 <Chair />
               </TouchableOpacity>
