@@ -23,7 +23,7 @@ export default function Login() {
   const [passwordIcon, setPasswordIcon] = useState("eye");
 
   const emailChecker = () =>
-    email.includes("@g.msuiit.com")
+    email.includes("@g.msuiit.edu.ph")
       ? setEmailError(false)
       : setEmailError(true);
 

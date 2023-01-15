@@ -1,13 +1,15 @@
 import { TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "../../../components/Container";
 import { ImageLogo } from "../../../components/Image";
 import { Text } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import StyledButton from "../../../components/Button";
+import { AuthenticationContext } from "../../../authentication/AuthenticationContext";
 
 export default function Confirmation({ route }) {
   const { date, time } = useRoute(route).params;
+  const { userData } = useContext(AuthenticationContext);
   const navigation = useNavigation();
   return (
     <Container>
@@ -20,7 +22,7 @@ export default function Confirmation({ route }) {
       <View className="bg-secondary border rounded-md">
         <Text>Date: {date}</Text>
         <Text>Time: {time}</Text>
-        <Text>Student ID Number: </Text>
+        <Text>Student ID Number: {userData.idNumber}</Text>
       </View>
 
       <Text className="text-center italic">
@@ -37,7 +39,6 @@ export default function Confirmation({ route }) {
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Dashboard");
-          navigation.reset('none');
         }}>
         <StyledButton text={"Close"} />
       </TouchableOpacity>

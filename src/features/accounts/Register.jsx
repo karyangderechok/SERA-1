@@ -1,5 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "../../components/Container";
 import { useState } from "react";
 import { Checkbox, Text, TextInput as IconInput } from "react-native-paper";
@@ -11,9 +11,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Dropdown } from "react-native-element-dropdown";
 import { ImageLogo } from "../../components/Image";
 import StyledButton from "../../components/Button";
+import { AuthenticationContext } from "../../authentication/AuthenticationContext";
 
 export default function Register() {
   const navigation = useNavigation();
+  const { registerRequest, error, isLoading } = useContext(
+    AuthenticationContext
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +34,7 @@ export default function Register() {
   const [isConditionTrue, setIsConditionTrue] = useState(false);
 
   const emailChecker = () =>
-    email.includes("@g.msuiit.com")
+    email.includes("@g.msuiit.edu.ph")
       ? setEmailError(false)
       : setEmailError(true);
 
@@ -62,6 +66,14 @@ export default function Register() {
   ];
 
   const [college, setCollege] = useState();
+
+  const [isFocus, setIsFocus] = useState(false);
+
+  const onPress = () => {
+    email && password && college && condition === true
+      ? registerRequest(email, password, idNumber, college)
+      : console.log(false);
+  };
 
   return (
     <Container style={"justify-center items-center"}>
@@ -136,7 +148,24 @@ export default function Register() {
           />
 
           <View>
-            <Dropdown labelField="Select College" data={college} />
+            <Dropdown
+              className="border border-gray-400 rounded-md border-1 h-10 px-2"
+              style={isFocus && { borderColor: "blue" }}
+              placeholderStyle={{ fontSize: 14 }}
+              selectedTextStyle={{ fontSize: 14 }}
+              data={collegeName}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={"Set College"}
+              value={college}
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
+              onChange={(item) => {
+                setCollege(item.value);
+                setIsFocus(false);
+              }}
+            />
           </View>
 
           <View>
@@ -163,7 +192,7 @@ export default function Register() {
           </View>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress()}>
           <StyledButton text={"Create Account"} />
         </TouchableOpacity>
       </View>

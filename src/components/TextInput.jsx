@@ -15,7 +15,7 @@ export default function StyledTextInput({
   error = false,
   blurOnSubmit = true,
   onEndEditing,
-  maxLength = 32,
+  maxLength = 52,
   secureTextEntry,
   onFocus,
   left,

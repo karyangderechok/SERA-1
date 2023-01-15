@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Guidelines from "../../features/reserve/guidelines/Guidelines";
@@ -6,7 +5,6 @@ import Seat from "../../features/reserve/seats/Seat";
 import Calendars from "../../features/reserve/calendar/Calendars";
 import Confirmation from "../../features/reserve/confirmation/Confirmation";
 import ReservationDetails from "../../features/reserve/details/ReservationDetails";
-import Confirm from "../../features/reserve/confirm/Confirm";
 
 const Stack = createNativeStackNavigator();
 const GuidlinesScreen = () => <Guidelines />;

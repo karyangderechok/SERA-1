@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "788792501399",
+    "project_id": "sera-e71bc",
+    "storage_bucket": "sera-e71bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788792501399:android:1346f7ac990b5eb6d675d2",
+        "android_client_info": {
+          "package_name": "com.sera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788792501399-6up38t9rihp82mdf6q2a1cqnbiimg5r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sera",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "788792501399-e3f1ah4lgejs6hrbm5pm16r21tufpcd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlDZCWSsvb_hzphRQHVtRMLQC17T8UhD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788792501399-e3f1ah4lgejs6hrbm5pm16r21tufpcd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

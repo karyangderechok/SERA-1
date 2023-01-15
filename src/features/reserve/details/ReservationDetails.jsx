@@ -1,14 +1,16 @@
 import { TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Text } from "react-native-paper";
 import { Container } from "../../../components/Container";
 import StyledButton from "../../../components/Button";
 import { ImageLogo } from "../../../components/Image";
+import { AuthenticationContext } from "../../../authentication/AuthenticationContext";
 
 export default function ReservationDetails({ route }) {
   const navigation = useNavigation();
   const { id, date, from, to } = useRoute(route).params;
+  const { userData } = useContext(AuthenticationContext);
 
   const monthString = [
     "January",
@@ -47,7 +49,9 @@ export default function ReservationDetails({ route }) {
         <Text>
           Time: {from} - {to}
         </Text>
-        <Text>Occupant: </Text>
+        <Text>
+          Occupant: {userData.email} <Text>({userData.idNumber})</Text>
+        </Text>
       </View>
 
       <View className="justify-end items-center">
