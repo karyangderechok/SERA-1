@@ -11,6 +11,8 @@ export default function AuthenticationProvider({ children }) {
   const [errorCreateAccount, setErrorCreateAccount] = useState(null);
   const [errorLogin, setErrorLogin] = useState(null);
   const [userData, setUserData] = useState("");
+  const [appointments, setAppointments] = useState("");
+  const [collegeQR, setCollegeQR] = useState([]);
 
   // Handle user state changes
   function onAuthStateChanged(data) {
@@ -25,6 +27,31 @@ export default function AuthenticationProvider({ children }) {
           .then((u) => {
             if (u !== "" || u !== undefined) {
               setUserData(u.data());
+
+              let qrData = [];
+
+              firestore()
+                .collection(u.data().college.toLowerCase())
+                .get()
+                .then((x) => {
+                  x.forEach((y) => {
+                    qrData.push(y.data());
+                  });
+
+                  if (qrData.length >= 0) {
+                    setCollegeQR(qrData);
+                  }
+                });
+            }
+          });
+
+        firestore()
+          .collection("appointments")
+          .doc(data.uid)
+          .get()
+          .then((u) => {
+            if (u !== "" || u !== undefined) {
+              setAppointments(u.data());
             }
           });
       }
@@ -96,6 +123,8 @@ export default function AuthenticationProvider({ children }) {
   const registerRequest = async (email, password, idNumber, college) => {
     setIsLoading(true);
     let userToken;
+    let uid;
+    let db;
 
     await auth()
       .createUserWithEmailAndPassword(email, password)
@@ -135,6 +164,32 @@ export default function AuthenticationProvider({ children }) {
         timestamp: firestore.FieldValue.serverTimestamp(),
       })
       .catch((e) => console.error(e));
+
+    firestore()
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then((u) => {
+        if (u !== "" || u !== undefined) {
+          db = u.data();
+          setUserData(db);
+        }
+      });
+  };
+
+  const appointmentRequest = async (seat, day, time) => {
+    setIsLoading(true);
+
+    await firestore()
+      .collection("appointments")
+      .doc(user.uid)
+      .set({
+        seatNumber: seat,
+        reservationDay: day,
+        reservationTime: time,
+        timestamp: firestore.FieldValue.serverTimestamp(),
+      })
+      .catch((e) => console.error(e));
   };
 
   return (
@@ -146,9 +201,12 @@ export default function AuthenticationProvider({ children }) {
         isLoading: !isLoading,
         errorLogin,
         errorCreateAccount,
+        appointments,
+        collegeQR,
         loginRequest,
         onLogout,
         registerRequest,
+        appointmentRequest,
       }}>
       {children}
     </AuthenticationContext.Provider>

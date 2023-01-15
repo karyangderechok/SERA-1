@@ -1,8 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Text, TextInput as IconInput } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Text,
+  TextInput as IconInput,
+} from "react-native-paper";
+import { AuthenticationContext } from "../../authentication/AuthenticationContext";
 import StyledButton from "../../components/Button";
 import { Container } from "../../components/Container";
 import { ImageLogo } from "../../components/Image";
@@ -12,6 +17,9 @@ import colors from "../../infastructure/themes/colors";
 
 export default function Login() {
   const navigation = useNavigation();
+  const { errorLogin, loginRequest, isLoading } = useContext(
+    AuthenticationContext
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,9 +99,19 @@ export default function Login() {
           />
         </View>
 
-        <TouchableOpacity>
-          <StyledButton text={"Login"} />
-        </TouchableOpacity>
+        {errorLogin && (
+          <Text className="text-center font-bold text-red-500 mb-4 border border-red-500 p-4 rounded-lg">
+            {errorLogin}
+          </Text>
+        )}
+
+        {!isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <TouchableOpacity onPress={() => loginRequest(email, password)}>
+            <StyledButton text={"Login"} />
+          </TouchableOpacity>
+        )}
 
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text className="text-center">

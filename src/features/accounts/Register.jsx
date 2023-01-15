@@ -2,7 +2,12 @@ import { View, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import { Container } from "../../components/Container";
 import { useState } from "react";
-import { Checkbox, Text, TextInput as IconInput } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Checkbox,
+  Text,
+  TextInput as IconInput,
+} from "react-native-paper";
 import EmailInput from "../../components/TextInput";
 import PasswordInput from "../../components/TextInput";
 import IDNumberInput from "../../components/TextInput";
@@ -14,8 +19,7 @@ import StyledButton from "../../components/Button";
 import { AuthenticationContext } from "../../authentication/AuthenticationContext";
 
 export default function Register() {
-  const navigation = useNavigation();
-  const { registerRequest, error, isLoading } = useContext(
+  const { registerRequest, errorCreateAccount, isLoading } = useContext(
     AuthenticationContext
   );
 
@@ -149,7 +153,7 @@ export default function Register() {
 
           <View>
             <Dropdown
-              className="border border-gray-400 rounded-md border-1 h-10 px-2"
+              className="border border-gray-400 rounded-md border-1 h-10 px-2 bg-white mb-2"
               style={isFocus && { borderColor: "blue" }}
               placeholderStyle={{ fontSize: 14 }}
               selectedTextStyle={{ fontSize: 14 }}
@@ -192,9 +196,19 @@ export default function Register() {
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => onPress()}>
-          <StyledButton text={"Create Account"} />
-        </TouchableOpacity>
+        {errorCreateAccount && (
+          <Text className="text-center font-bold text-red-500 mb-4 border border-red-500 p-4 rounded-lg">
+            {errorCreateAccount}
+          </Text>
+        )}
+
+        {!isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <TouchableOpacity onPress={() => onPress()}>
+            <StyledButton text={"Create Account"} />
+          </TouchableOpacity>
+        )}
       </View>
     </Container>
   );

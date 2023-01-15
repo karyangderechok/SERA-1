@@ -10,7 +10,7 @@ import { AuthenticationContext } from "../../../authentication/AuthenticationCon
 export default function ReservationDetails({ route }) {
   const navigation = useNavigation();
   const { id, date, from, to } = useRoute(route).params;
-  const { userData } = useContext(AuthenticationContext);
+  const { userData, appointmentRequest } = useContext(AuthenticationContext);
 
   const monthString = [
     "January",
@@ -56,12 +56,13 @@ export default function ReservationDetails({ route }) {
 
       <View className="justify-end items-center">
         <TouchableOpacity
-          onPress={() =>
+          onPress={() => {
+            appointmentRequest(id, appointmentDay, time);
             navigation.navigate("Confirmation", {
               date: appointmentDay,
               time: time,
-            })
-          }>
+            });
+          }}>
           <StyledButton text={"Confirm"} />
         </TouchableOpacity>
       </View>

@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import BarcodeMask from "react-native-barcode-mask";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthenticationContext } from "../../authentication/AuthenticationContext";
+import { useNavigation } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const { collegeQR } = useContext(AuthenticationContext);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -16,9 +22,21 @@ export default function App() {
     getBarCodeScannerPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    let hasSameData = false;
+    collegeQR.forEach((element) => {
+      if (element.data === data) {
+        hasSameData = true;
+      }
+    });
+    if (hasSameData) {
+      navigation.navigate("Seat Details");
+    } else {
+      alert(
+        "Please look at the number on the seat and the choosen seat number you reserved"
+      );
+    }
   };
 
   if (hasPermission === null) {
@@ -29,13 +47,25 @@ export default function App() {
   }
 
   return (
-    <View className="flex-1 justify-center bg-black">
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      <BarcodeMask edgeColor="#62B1F6" showAnimatedLine />
-    </View>
+    <SafeAreaView className="flex-1">
+      <View style={styles.container}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+        {scanned ? (
+          <ActivityIndicator size={100}/>
+        ) : (
+          <BarcodeMask edgeColor="#62B1F6" showAnimatedLine />
+        )}
+        {scanned && (
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => setScanned(false)}
+          />
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
 
