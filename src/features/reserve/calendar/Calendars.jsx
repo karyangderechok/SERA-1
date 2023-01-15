@@ -67,9 +67,10 @@ export default function Calendars({ route }) {
       <View className="items-center">
         <ImageLogo />
       </View>
-      <Text className="text-2xl mb-4">Seat 1</Text>
+      <Text className="text-2xl mb-4">Seat {id}</Text>
       <View className="p-3">
         <Calendar
+          className=" border rounded-md border-primary"
           // Hide month navigation arrows. Default = false
           hideArrows={true}
           // Do not show days of other months in month page. Default = false

@@ -10,7 +10,7 @@ import { AuthenticationContext } from "../../authentication/AuthenticationContex
 
 export default function Dashboard() {
   const navigation = useNavigation();
-  const { onLogout } = useContext(AuthenticationContext);
+  const { onLogout, getAppointmentRequest } = useContext(AuthenticationContext);
   return (
     <Container style={"items-center justify-center space-y-4"}>
       <Text className="text-lg font-bold">What do you want to do?</Text>
@@ -23,7 +23,11 @@ export default function Dashboard() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Allocate")}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Allocate");
+          getAppointmentRequest();
+        }}>
         <View className="items-center p-5 aspect-square w-3/5">
           <QR />
           <View className="pt-4 w-full">

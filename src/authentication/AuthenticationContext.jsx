@@ -44,16 +44,6 @@ export default function AuthenticationProvider({ children }) {
                 });
             }
           });
-
-        firestore()
-          .collection("appointments")
-          .doc(data.uid)
-          .get()
-          .then((u) => {
-            if (u !== "" || u !== undefined) {
-              setAppointments(u.data());
-            }
-          });
       }
     }
   }
@@ -66,6 +56,18 @@ export default function AuthenticationProvider({ children }) {
   if (initializing) {
     return null;
   }
+
+  const getAppointmentRequest = async () => {
+    await firestore()
+      .collection("appointments")
+      .doc(user.uid)
+      .get()
+      .then((u) => {
+        if (u !== "" || u !== undefined) {
+          setAppointments(u.data());
+        }
+      });
+  };
 
   const loginRequest = async (email, password) => {
     let uid;
@@ -207,6 +209,7 @@ export default function AuthenticationProvider({ children }) {
         onLogout,
         registerRequest,
         appointmentRequest,
+        getAppointmentRequest,
       }}>
       {children}
     </AuthenticationContext.Provider>

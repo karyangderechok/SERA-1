@@ -52,8 +52,8 @@ export default function Seat1() {
 
       <View className="flex-row">
         <View>
-          <Text className="text-xl">Month</Text>
-          <Text className="text-xl">of</Text>
+          <Text className="text-2xl">Month</Text>
+          <Text className="text-2xl">of</Text>
           <Text className="text-2xl font-bold">{monthString[month]}</Text>
         </View>
 

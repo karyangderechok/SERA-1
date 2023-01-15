@@ -38,34 +38,35 @@ export default function ReservationDetails({ route }) {
 
   return (
     <Container style={"grow"}>
-      <View className="items-center">
-        <ImageLogo />
-      </View>
-      <Text className="text-lg">Seat {id}</Text>
-      <Text className="font-bold italic">Reservation date and time</Text>
-      <View className="my-4 border rounded-md">
-        <Text className="text-lg">Reservation Details:</Text>
-        <Text>Date: {appointmentDay}</Text>
-        <Text>
-          Time: {from} - {to}
-        </Text>
-        <Text>
-          Occupant: {userData.email} <Text>({userData.idNumber})</Text>
-        </Text>
+      <View className='grow'>
+        <View className="items-center">
+          <ImageLogo />
+        </View>
+        <Text className="text-2xl my-4">Seat {id}</Text>
+        <Text className="font-bold italic">Reservation date and time</Text>
+        <View className="my-4 p-2 border rounded-md bg-primary">
+          <Text className="text-white text-lg">Reservation Details:</Text>
+          <Text className="text-white text-lg">Date: {appointmentDay}</Text>
+          <Text className="text-white text-lg">
+            Time: {from} - {to}
+          </Text>
+          <Text className="text-white text-lg">
+            Occupant: {userData.email}{" "}
+            <Text className="text-white text-lg">({userData.idNumber})</Text>
+          </Text>
+        </View>
       </View>
 
-      <View className="justify-end items-center">
-        <TouchableOpacity
-          onPress={() => {
-            appointmentRequest(id, appointmentDay, time);
-            navigation.navigate("Confirmation", {
-              date: appointmentDay,
-              time: time,
-            });
-          }}>
-          <StyledButton text={"Confirm"} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          appointmentRequest(id, appointmentDay, time);
+          navigation.navigate("Confirmation", {
+            date: appointmentDay,
+            time: time,
+          });
+        }}>
+        <StyledButton text={"Confirm"} />
+      </TouchableOpacity>
     </Container>
   );
 }
