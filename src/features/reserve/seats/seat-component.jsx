@@ -16,7 +16,8 @@ export const Page1 = ({ value }) => {
         <Modal
           visible={visible}
           onDismiss={() => setVisible(false)}
-          contentContainerStyle={{ backgroundColor: "white", padding: 20 }}>
+          contentContainerrStyle={{ backgroundColor: "white", padding: 20 }}
+        >
           <Text className="text-red-500">Please select day</Text>
         </Modal>
       </Portal>;
@@ -45,7 +46,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -68,7 +70,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -91,7 +94,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -114,7 +118,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -137,7 +142,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -160,7 +166,8 @@ export const Page1 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -174,6 +181,7 @@ export const Page1 = ({ value }) => {
 
 export const Page2 = ({ value }) => {
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
 
   const checker = (id, day) => {
     if (day === null) {
@@ -182,7 +190,8 @@ export const Page2 = ({ value }) => {
         <Modal
           visible={visible}
           onDismiss={() => setVisible(false)}
-          contentContainerStyle={{ backgroundColor: "white", padding: 20 }}>
+          contentContainerStyle={{ backgroundColor: "white", padding: 20 }}
+        >
           <Text className="text-red-500">Please select day</Text>
         </Modal>
       </Portal>;
@@ -211,7 +220,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -234,7 +244,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -257,7 +268,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -280,7 +292,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -303,7 +316,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>
@@ -326,7 +340,8 @@ export const Page2 = ({ value }) => {
               <TouchableOpacity
                 onPress={() => {
                   checker(item.id, item.day);
-                }}>
+                }}
+              >
                 <Chair />
               </TouchableOpacity>
             </View>

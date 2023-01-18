@@ -10,7 +10,12 @@ import { AuthenticationContext } from "../../authentication/AuthenticationContex
 
 export default function Dashboard() {
   const navigation = useNavigation();
-  const { onLogout, getAppointmentRequest } = useContext(AuthenticationContext);
+  const { onLogout, getAppointmentRequest, userData, fetchQR } = useContext(
+    AuthenticationContext
+  );
+
+const college = userData.college.toLowerCase()
+
   return (
     <Container style={"items-center justify-center space-y-4"}>
       <Text className="text-lg font-bold">What do you want to do?</Text>
@@ -25,9 +30,14 @@ export default function Dashboard() {
 
       <TouchableOpacity
         onPress={() => {
+          fetchQR(college);
+
+          setTimeout(() => {
+            getAppointmentRequest();
+          }, 1000);
           navigation.navigate("Allocate");
-          getAppointmentRequest();
-        }}>
+        }}
+      >
         <View className="items-center p-5 aspect-square w-3/5">
           <QR />
           <View className="pt-4 w-full">

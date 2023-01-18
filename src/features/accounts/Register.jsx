@@ -34,9 +34,6 @@ export default function Register() {
   const [securePassword, setSecurePassword] = useState(true);
   const [passwordIcon, setPasswordIcon] = useState("eye");
 
-  const [condition, setCondition] = useState(false);
-  const [isConditionTrue, setIsConditionTrue] = useState(false);
-
   const emailChecker = () =>
     email.includes("@g.msuiit.edu.ph")
       ? setEmailError(false)
@@ -52,20 +49,20 @@ export default function Register() {
     password.length >= 8 ? setPasswordError(false) : setPasswordError(true);
 
   const IDNumberCHecker = () =>
-    idNumber.length >= 1 && idNumber.length <= 8
+    idNumber.length >= 1 && idNumber.length <= 9
       ? setIdNumberError(false)
       : setIdNumberError(true);
-
-  const conditionCheck = () =>
-    condition !== true ? setIsConditionTrue(true) : setIsConditionTrue(false);
 
   const collegeName = [
     { label: "COET", value: "COET" },
     { label: "COA", value: "COA" },
     { label: "EDUC", value: "EDUC" },
     { label: "CSS", value: "CSS" },
-    { label: "CON", value: "CONT" },
+    { label: "CON", value: "CON" },
     { label: "BSIAM", value: "BSIAM" },
+    { label: "BSBIO", value: "BSBIO" },
+    { label: "BSBIO", value: "BSBIO" },
+    { label: "BSBIO", value: "BSBIO" },
     { label: "BSBIO", value: "BSBIO" },
   ];
 
@@ -74,7 +71,7 @@ export default function Register() {
   const [isFocus, setIsFocus] = useState(false);
 
   const onPress = () => {
-    email && password && college && condition === true
+    email && password && college
       ? registerRequest(email, password, idNumber, college)
       : console.log(false);
   };
@@ -138,7 +135,7 @@ export default function Register() {
             onChangeText={setIdNumber}
             error={idNumberError}
             onEndEditing={() => IDNumberCHecker()}
-            helperText={"Must be a Valid Gmail Address"}
+            helperText={"Must be a Valid ID Number"}
             right={
               <IconInput.Icon
                 icon={"phone"}
@@ -148,7 +145,8 @@ export default function Register() {
                 }
               />
             }
-            placeholder={"@g.msuiit.edu.ph"}
+            placeholder={"9999-9999"}
+            maxLength={9}
           />
 
           <View>
@@ -170,29 +168,6 @@ export default function Register() {
                 setIsFocus(false);
               }}
             />
-          </View>
-
-          <View>
-            <View className="flex flex-row">
-              <Checkbox
-                status={condition ? "checked" : "unchecked"}
-                onPress={() => {
-                  setCondition(!condition);
-                  setIsConditionTrue(false);
-                }}
-                color={colors.primary}
-              />
-              <Text className="w-screen">
-                I agree to the{" "}
-                <Text className="font-bold">terms & Conditions</Text> and{"\n"}
-                <Text className="font-bold"> Privacy Policy</Text>
-              </Text>
-            </View>
-            {isConditionTrue && (
-              <HelperText type="error">
-                Please Check the terms & Conditions
-              </HelperText>
-            )}
           </View>
         </View>
 

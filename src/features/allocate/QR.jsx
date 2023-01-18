@@ -54,7 +54,7 @@ export default function App() {
           style={StyleSheet.absoluteFillObject}
         />
         {scanned ? (
-          <ActivityIndicator size={100}/>
+          <ActivityIndicator size={100} />
         ) : (
           <BarcodeMask edgeColor="#62B1F6" showAnimatedLine />
         )}

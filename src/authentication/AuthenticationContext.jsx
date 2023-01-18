@@ -27,21 +27,6 @@ export default function AuthenticationProvider({ children }) {
           .then((u) => {
             if (u !== "" || u !== undefined) {
               setUserData(u.data());
-
-              let qrData = [];
-
-              firestore()
-                .collection(u.data().college.toLowerCase())
-                .get()
-                .then((x) => {
-                  x.forEach((y) => {
-                    qrData.push(y.data());
-                  });
-
-                  if (qrData.length >= 0) {
-                    setCollegeQR(qrData);
-                  }
-                });
             }
           });
       }
@@ -56,6 +41,22 @@ export default function AuthenticationProvider({ children }) {
   if (initializing) {
     return null;
   }
+
+  const fetchQR = (data) => {
+    let qrData = [];
+    firestore()
+      .collection(data)
+      .get()
+      .then((x) => {
+        x.forEach((y) => {
+          qrData.push(y.data());
+        });
+
+        if (qrData.length >= 0) {
+          setCollegeQR(qrData);
+        }
+      });
+  };
 
   const getAppointmentRequest = async () => {
     await firestore()
@@ -125,13 +126,14 @@ export default function AuthenticationProvider({ children }) {
   const registerRequest = async (email, password, idNumber, college) => {
     setIsLoading(true);
     let userToken;
-    let uid;
     let db;
 
     await auth()
       .createUserWithEmailAndPassword(email, password)
       .then(async (u) => {
-        userToken = u.user.uid;
+        if (u !== "" || u !== undefined) {
+          userToken = u.user.uid;
+        }
       })
       .catch((e) => {
         if (e.code === "auth/email-already-in-use") {
@@ -167,16 +169,18 @@ export default function AuthenticationProvider({ children }) {
       })
       .catch((e) => console.error(e));
 
-    firestore()
-      .collection("users")
-      .doc(uid)
-      .get()
-      .then((u) => {
-        if (u !== "" || u !== undefined) {
-          db = u.data();
-          setUserData(db);
-        }
-      });
+    setTimeout(() => {
+      firestore()
+        .collection("users")
+        .doc(userToken)
+        .get()
+        .then((u) => {
+          if (u !== "" || u !== undefined) {
+            db = u.data();
+            setUserData(db);
+          }
+        });
+    }, 2000);
   };
 
   const appointmentRequest = async (seat, day, time) => {
@@ -192,6 +196,17 @@ export default function AuthenticationProvider({ children }) {
         timestamp: firestore.FieldValue.serverTimestamp(),
       })
       .catch((e) => console.error(e));
+  };
+
+  const deleteAppointment = async (docID) => {
+    console.log(docID);
+    firestore()
+      .collection("appointments")
+      .doc(docID)
+      .delete()
+      .then(() => {
+        console.log("User deleted!");
+      });
   };
 
   return (
@@ -210,7 +225,10 @@ export default function AuthenticationProvider({ children }) {
         registerRequest,
         appointmentRequest,
         getAppointmentRequest,
-      }}>
+        deleteAppointment,
+        fetchQR,
+      }}
+    >
       {children}
     </AuthenticationContext.Provider>
   );

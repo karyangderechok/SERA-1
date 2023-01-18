@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "../../components/Container";
 import { ImageLogo } from "../../components/Image";
 import StyledButton from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { AuthenticationContext } from "../../authentication/AuthenticationContext";
 
 export default function Confirm() {
   const navigation = useNavigation();
+  const {deleteAppointment, user} = useContext(AuthenticationContext)
   return (
     <Container style={"grow"}>
       <View className="items-center">
@@ -23,7 +25,9 @@ export default function Confirm() {
         the facility{" "}
       </Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+      <TouchableOpacity onPress={() => {navigation.navigate("Dashboard")
+      deleteAppointment(user.uid)
+    }}>
         <StyledButton text={"Done"} />
       </TouchableOpacity>
     </Container>
