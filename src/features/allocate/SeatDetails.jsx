@@ -10,6 +10,7 @@ export default function SeatDetails() {
   const [value, setValue] = useState();
   const navigation = useNavigation();
   const { appointments, userData } = useContext(AuthenticationContext);
+  console.log(appointments);
   return (
     <Container>
       <View className="items-center">

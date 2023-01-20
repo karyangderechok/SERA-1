@@ -14,8 +14,6 @@ export default function Dashboard() {
     AuthenticationContext
   );
 
-const college = userData.college.toLowerCase()
-
   return (
     <Container style={"items-center justify-center space-y-4"}>
       <Text className="text-lg font-bold">What do you want to do?</Text>
@@ -30,11 +28,8 @@ const college = userData.college.toLowerCase()
 
       <TouchableOpacity
         onPress={() => {
-          fetchQR(college);
-
-          setTimeout(() => {
-            getAppointmentRequest();
-          }, 1000);
+          fetchQR(userData.college.toLowerCase());
+          getAppointmentRequest();
           navigation.navigate("Allocate");
         }}
       >

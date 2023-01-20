@@ -54,16 +54,13 @@ export default function Register() {
       : setIdNumberError(true);
 
   const collegeName = [
-    { label: "COET", value: "COET" },
-    { label: "COA", value: "COA" },
-    { label: "EDUC", value: "EDUC" },
-    { label: "CSS", value: "CSS" },
+    { label: "COE", value: "COE" },
+    { label: "CASS", value: "CASS" },
+    { label: "CEBA", value: "CEBA" },
+    { label: "CCS", value: "CCS" },
     { label: "CON", value: "CON" },
-    { label: "BSIAM", value: "BSIAM" },
-    { label: "BSBIO", value: "BSBIO" },
-    { label: "BSBIO", value: "BSBIO" },
-    { label: "BSBIO", value: "BSBIO" },
-    { label: "BSBIO", value: "BSBIO" },
+    { label: "CSM", value: "CSM" },
+    { label: "CED", value: "CED" },
   ];
 
   const [college, setCollege] = useState();
